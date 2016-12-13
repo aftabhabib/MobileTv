@@ -1,4 +1,4 @@
-package com.wlx.mtvlibrary;
+package com.wlx.mtvlibrary.base;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -23,12 +23,12 @@ public abstract class BaseActivity extends Activity {
             setContentView(getLayoutId());
         else if (getLayoutView() != null)
             setContentView(getLayoutView());
+        /**ButterKnife*/
+        ButterKnife.inject(this);
         /**初始化视图（abstract）*/
         init();
         /**初始化监听*/
         initLinstener();
-        /**ButterKnife*/
-        ButterKnife.inject(this);
     }
 
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MobileTv</string>
+    <string name="app_welcome">欢迎界面</string>
 </resources>
