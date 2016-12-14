@@ -1,6 +1,7 @@
-package com.wlx.widget;
+package com.wlx.mobiletv.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,9 +14,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Toast;
 
-import com.wlx.mobiletv.R;
+import com.wlx.mobiletv.activity.R;
+import com.wlx.mobiletv.impl.CountDownListener;
 
 /**
  * 作者：LucianWang
@@ -31,7 +32,7 @@ public class CountDown extends View {
      */
     private Paint mPaint;
     /**
-     * 倒计时
+     * 倒计时，默认3秒
      */
     private float mTime;
     /**
@@ -71,9 +72,13 @@ public class CountDown extends View {
      */
     private float mStorkeWidth;
     /**
+     * 倒计时字体大小
+     */
+    private float mCenterTextSize;
+    /**
      * 画的角度
      */
-    private float angle;
+    private float angle = 0;
     /**
      * 每刷新一次画的角度
      */
@@ -94,6 +99,10 @@ public class CountDown extends View {
      * 状态种类
      */
     private int CURRENT_STARTING = 1, CURRENT_STOP = 2;
+    /**
+     * 倒计时监听
+     */
+    private CountDownListener l = null;
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -102,8 +111,12 @@ public class CountDown extends View {
                 case START: {
                     CURRENT_STATE = CURRENT_STARTING;
                     if (mTime <= 0) {
+                        if (l != null)
+                            l.onFinish();
                         mHandler.sendEmptyMessage(STOP);
                     } else {
+                        if (l != null)
+                            l.onRunning();
                         mTime -= refresh_time;
                         angle += every_angle;
                         invalidate();
@@ -113,6 +126,8 @@ public class CountDown extends View {
                 }
                 case STOP: {
                     CURRENT_STATE = CURRENT_STOP;
+                    if (l != null)
+                        l.onFinish();
                     mHandler.removeMessages(START);
                     break;
                 }
@@ -126,36 +141,42 @@ public class CountDown extends View {
     }
 
     public CountDown(Context context, AttributeSet attrs) {
-
         this(context, attrs, 0);
     }
 
     public CountDown(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initView();
+        initView(context, attrs);
     }
 
-    private void initView() {
+    private void initView(Context context, AttributeSet attrs) {
+        //// TODO: 2016/12/13 自定义属性
+        TypedArray mArray = context.obtainStyledAttributes(attrs, R.styleable.CountDown);
+        mRadius = mArray.getFloat(R.styleable.CountDown_mRadius, 50);
+        mStorkeWidth = mArray.getFloat(R.styleable.CountDown_mStorkeWidth, 6);
+        mCenterTextSize = mArray.getFloat(R.styleable.CountDown_mCenterTextSize, 40);
+        //中心颜色
+        colorCountDownCenter = mArray.getInt(R.styleable.CountDown_colorCountDownCenter, getResources().getColor(R.color.colorCountDownCenter));
+        //外描边颜色
+        colorCountDownExternal = mArray.getInt(R.styleable.CountDown_colorCountDownExternal, getResources().getColor(R.color.colorCountDownExternal));
+
         mPaint = new TextPaint();
         mPaint.setAntiAlias(true);
         mPaint.setFakeBoldText(true);
-        //// TODO: 2016/12/13 自定义属性
-        mPaint.setTextSize(50);
-        mRadius = 300;
-        mTime = 3;
-        angle = 0;
-        mStorkeWidth = 20;
-        every_angle = 120 / ((mTime * 1000) / refresh_time);
+        mPaint.setTextSize(mCenterTextSize);
+
+        //测量字体宽高的Rect
         mRect = new Rect();
-        colorCountDownCenter = getResources().getColor(R.color.colorCountDownCenter);
-        colorCountDownExternal = getResources().getColor(R.color.colorCountDownExternal);
+
         //布局加载完成监听（可以获取到宽、高）
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                mWidth = getMeasuredWidth();
-                mHeight = getMeasuredHeight();
-                mRectF = new RectF(mWidth / 2 - mRadius + mStorkeWidth, mHeight / 2 - mRadius + mStorkeWidth, mWidth / 2 + mRadius - mStorkeWidth, mHeight / 2 + mRadius - mStorkeWidth);
+                mWidth = CountDown.this.getMeasuredWidth();
+                Log.i(TAG, "onGlobalLayout: w" + mWidth);
+                mHeight = CountDown.this.getMeasuredHeight();
+                Log.i(TAG, "onGlobalLayout: h" + mHeight);
+                mRectF = new RectF((mWidth + mStorkeWidth) / 2 - mRadius, (mHeight + mStorkeWidth) / 2 - mRadius, (mWidth - mStorkeWidth) / 2 + mRadius, (mHeight - mStorkeWidth) / 2 + mRadius);
             }
         });
     }
@@ -171,10 +192,10 @@ public class CountDown extends View {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(colorCountDownCenter);
         Log.i(TAG, "onDraw: " + angle);
-        canvas.drawArc(mRectF, 0, angle, true, mPaint);
+        canvas.drawArc(mRectF, -90, angle, true, mPaint);
         //画字
         mPaint.setColor(Color.BLACK);
-        currentTime = String.valueOf((int) mTime / 1000);
+        currentTime = String.valueOf((int) Math.ceil(mTime / 1000));
         mPaint.getTextBounds(currentTime, 0, currentTime.length(), mRect);
         canvas.drawText(currentTime, (mWidth - mRect.width()) / 2, (mHeight + mRect.height()) / 2, mPaint);
 
@@ -183,10 +204,69 @@ public class CountDown extends View {
     /**
      * 设置倒计时时间
      *
-     * @param time 倒计时时间（秒）
+     * @param time 倒计时时间（毫秒）
      */
-    public CountDown setmTime(float time) {
-        mTime = time;
+    public CountDown setTime(float time) {
+        this.mTime = time;
+        every_angle = 360/ (mTime / refresh_time);
+        return this;
+    }
+
+    /**
+     * 设置描边颜色
+     *
+     * @param colorCountDownExternal 描边颜色
+     */
+    public CountDown setColorCountDownExternal(int colorCountDownExternal) {
+        this.colorCountDownExternal = colorCountDownExternal;
+        return this;
+    }
+
+    /**
+     * 设置中间颜色
+     *
+     * @param colorCountDownCenter 中间颜色
+     */
+    public CountDown setColorCountDownCenter(int colorCountDownCenter) {
+        this.colorCountDownCenter = colorCountDownCenter;
+        return this;
+    }
+
+    /**
+     * 设置半径
+     *
+     * @param mRadius 半径
+     */
+    public CountDown setRadius(float mRadius) {
+        this.mRadius = mRadius;
+        return this;
+    }
+
+    /**
+     * 设置描边宽度
+     *
+     * @param mStorkeWidth 描边宽度
+     */
+    public CountDown setStorkeWidth(float mStorkeWidth) {
+        this.mStorkeWidth = mStorkeWidth;
+        return this;
+    }
+
+    /**
+     * 设置中心字体大小
+     *
+     * @param mCenterTextSize 中心字体大小
+     */
+    public CountDown setCenterTextSize(float mCenterTextSize) {
+        this.mCenterTextSize = mCenterTextSize;
+        return this;
+    }
+
+    /**
+     * 设置监听
+     */
+    public CountDown setCountDownListener(CountDownListener l) {
+        this.l = l;
         return this;
     }
 
@@ -194,8 +274,11 @@ public class CountDown extends View {
      * 开启倒计时
      */
     public void start() {
-        if (CURRENT_STATE != CURRENT_STARTING)
+        if (CURRENT_STATE != CURRENT_STARTING) {
+            if (l != null)
+                l.onRun();
             mHandler.sendEmptyMessage(START);
+        }
     }
 
     /**
@@ -206,5 +289,4 @@ public class CountDown extends View {
             mHandler.sendEmptyMessage(STOP);
         }
     }
-
 }

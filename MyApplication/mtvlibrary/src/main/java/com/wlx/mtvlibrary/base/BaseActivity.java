@@ -1,6 +1,7 @@
 package com.wlx.mtvlibrary.base;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 

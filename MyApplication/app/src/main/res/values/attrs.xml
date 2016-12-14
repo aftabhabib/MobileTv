@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //自定义倒计时属性
+    <declare-styleable name="CountDown">
+        //半径
+        <attr name="mRadius" format="integer"/>
+        //外描边宽度
+        <attr name="mStorkeWidth" format="integer"/>
+        //中间字体大小
+        <attr name="mCenterTextSize" format="integer"/>
+        //中间颜色
+        <attr name="colorCountDownCenter" format="color"/>
+        //描边颜色
+        <attr name="colorCountDownExternal" format="color"/>
+    </declare-styleable>
+</resources>

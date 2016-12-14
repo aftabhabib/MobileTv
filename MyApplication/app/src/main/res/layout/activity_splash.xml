@@ -5,19 +5,21 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wlx.mobiletv.SplashActivity">
+    tools:context="com.wlx.mobiletv.activity.SplashActivity">
 
     <TextView
         android:id="@+id/tv_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:text="欢迎界面"
         />
 
-    <com.wlx.widget.CountDown
+    <com.wlx.mobiletv.widget.CountDown
         android:id="@+id/cd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_200"
+        android:layout_height="@dimen/_200"
         android:layout_alignParentRight="true"
         />
+
 </RelativeLayout>

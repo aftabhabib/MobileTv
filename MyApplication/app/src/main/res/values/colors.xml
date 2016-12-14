@@ -3,9 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    //倒计时内部颜色
+    //默认倒计时内部颜色
     <color name="colorCountDownCenter">#C3C4C6</color>
-    //倒计时描边颜色
+    //默认倒计时描边颜色
     <color name="colorCountDownExternal">#949494</color>
 
 </resources>
