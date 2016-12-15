@@ -1,5 +1,4 @@
-<resources>
-    <style name="mAppTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen"/>
-    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar"/>
+<resources>Theme.AppCompat.Light.DarkActionBar
+    <style name="mAppTheme" parent="Theme.AppCompat.Light"/>
 
 </resources>

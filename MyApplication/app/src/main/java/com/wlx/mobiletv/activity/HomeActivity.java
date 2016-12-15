@@ -1,13 +1,10 @@
 package com.wlx.mobiletv.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.Button;
 
 import com.wlx.mtvlibrary.base.BaseActivity;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
@@ -24,6 +21,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        button.requestFocus();
     }
 
     @Override

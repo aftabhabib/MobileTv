@@ -1,9 +1,6 @@
 package com.wlx.mobiletv.activity;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.util.Log;
-
 import com.wlx.mobiletv.impl.CountDownListener;
 import com.wlx.mobiletv.widget.CountDown;
 import com.wlx.mtvlibrary.base.BaseActivity;

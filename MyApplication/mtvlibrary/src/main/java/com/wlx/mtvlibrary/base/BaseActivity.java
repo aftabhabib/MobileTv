@@ -3,6 +3,7 @@ package com.wlx.mtvlibrary.base;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import butterknife.ButterKnife;
@@ -14,7 +15,7 @@ import butterknife.ButterKnife;
  * 说明：Activity的基类
  */
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

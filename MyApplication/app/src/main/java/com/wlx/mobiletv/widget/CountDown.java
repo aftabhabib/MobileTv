@@ -173,9 +173,7 @@ public class CountDown extends View {
             @Override
             public void onGlobalLayout() {
                 mWidth = CountDown.this.getMeasuredWidth();
-                Log.i(TAG, "onGlobalLayout: w" + mWidth);
                 mHeight = CountDown.this.getMeasuredHeight();
-                Log.i(TAG, "onGlobalLayout: h" + mHeight);
                 mRectF = new RectF((mWidth + mStorkeWidth) / 2 - mRadius, (mHeight + mStorkeWidth) / 2 - mRadius, (mWidth - mStorkeWidth) / 2 + mRadius, (mHeight - mStorkeWidth) / 2 + mRadius);
             }
         });
@@ -191,7 +189,6 @@ public class CountDown extends View {
         //画弧度
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(colorCountDownCenter);
-        Log.i(TAG, "onDraw: " + angle);
         canvas.drawArc(mRectF, -90, angle, true, mPaint);
         //画字
         mPaint.setColor(Color.BLACK);

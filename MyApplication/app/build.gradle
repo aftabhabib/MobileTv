@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion '19.1.0'
+    compileSdkVersion 23
+    buildToolsVersion '23.0.1'
     defaultConfig {
         applicationId "com.wlx.mobiletv"
         minSdkVersion 19
-        targetSdkVersion 19
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,9 +20,12 @@ android {
 }
 
 dependencies {
+    compile project(':mtvlibrary')
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:19.+'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:preference-v7:23.0.1'
+    compile 'com.android.support:support-annotations:23.0.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.7.5'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.5'
-    compile project(':mtvlibrary')
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.11'
 }
