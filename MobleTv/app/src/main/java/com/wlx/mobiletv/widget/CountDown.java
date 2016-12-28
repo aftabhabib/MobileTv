@@ -159,6 +159,7 @@ public class CountDown extends View {
         colorCountDownCenter = mArray.getInt(R.styleable.CountDown_colorCountDownCenter, getResources().getColor(R.color.colorCountDownCenter));
         //外描边颜色
         colorCountDownExternal = mArray.getInt(R.styleable.CountDown_colorCountDownExternal, getResources().getColor(R.color.colorCountDownExternal));
+        mArray.recycle();
 
         mPaint = new TextPaint();
         mPaint.setAntiAlias(true);

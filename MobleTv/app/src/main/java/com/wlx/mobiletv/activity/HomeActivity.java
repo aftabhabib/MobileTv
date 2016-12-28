@@ -1,12 +1,15 @@
 package com.wlx.mobiletv.activity;
 
-import android.content.Intent;
-import android.widget.Button;
+import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
+import android.widget.RelativeLayout;
 
+import com.wlx.mobiletv.adapter.HomeViewPagerAdapter;
+import com.wlx.mobiletv.widget.PageIndicator;
 import com.wlx.mtvlibrary.base.BaseActivity;
 
 import butterknife.InjectView;
-import butterknife.OnClick;
+
 
 /**
  * 作者：LucianWang
@@ -16,12 +19,37 @@ import butterknife.OnClick;
  */
 
 public class HomeActivity extends BaseActivity {
-    @InjectView(R.id.button)
-    Button button;
+
+    @InjectView(R.id.vp_home)
+    ViewPager vpHome;
+    @InjectView(R.id.rl_container)
+    RelativeLayout rlContainer;
+    @InjectView(R.id.pi_home)
+    PageIndicator piHome;
+    /**
+     * vpHome的适配器
+     */
+    private HomeViewPagerAdapter adapter;
 
     @Override
     protected void init() {
-        button.requestFocus();
+        vpHome.measure(0, 0);
+        int pagerWidth = (int) (getResources().getDisplayMetrics().widthPixels * 3.0f / 5.0f);
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) vpHome.getLayoutParams();
+        if (lp == null) {
+            lp = new RelativeLayout.LayoutParams(pagerWidth, RelativeLayout.LayoutParams.MATCH_PARENT);
+        } else {
+            lp.width = pagerWidth;
+        }
+        vpHome.setLayoutParams(lp);//设置页面宽度为屏幕的3/5
+        vpHome.setPageMargin(getResources().getDimensionPixelSize(R.dimen._50));
+        adapter = new HomeViewPagerAdapter(this);
+        vpHome.setAdapter(adapter);
+        //去掉滑到边缘后模糊效果
+        vpHome.setOverScrollMode(ViewPager.OVER_SCROLL_NEVER);
+        vpHome.setOffscreenPageLimit(adapter.getCount());
+        piHome.setViewPager(vpHome);
+        piHome.setCurrentItem(adapter.getCount() / 2);
     }
 
     @Override
@@ -30,8 +58,8 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.button)
-    public void onClick() {
-        startActivity(new Intent(this, VideoActivity.class));
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return vpHome.dispatchTouchEvent(event);
     }
 }

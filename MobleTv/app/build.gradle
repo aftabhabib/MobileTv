@@ -25,7 +25,7 @@ android {
         release {
             minifyEnabled false
             //Zipalign优化
-            zipAlignEnabled true
+            zipAlignEnabled false
             // 移除无用的resource文件
             shrinkResources false
             proguardFiles 'proguard-rules.pro'
@@ -34,12 +34,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled false
-            //Zipalign优化
-            zipAlignEnabled true
-            // 移除无用的resource文件
-            shrinkResources false
-            proguardFiles 'proguard-rules.pro'
             signingConfig signingConfigs.mobletv
             buildConfigField "boolean", "IS_DEBUG_MODE", "false"
         }
@@ -73,5 +67,7 @@ dependencies {
     compile 'com.android.support:support-annotations:23.0.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.7.5'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.5'
+    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.7.5'
     compile 'com.google.android.exoplayer:exoplayer:r1.5.11'
+    compile 'com.android.support:support-v4:23.0.1'
 }
