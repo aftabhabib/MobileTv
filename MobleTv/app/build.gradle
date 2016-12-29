@@ -32,6 +32,7 @@ android {
             buildConfigField "boolean", "IS_DEBUG_MODE", "false"
             signingConfig signingConfigs.mobletv
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
         }
         debug {
             signingConfig signingConfigs.mobletv

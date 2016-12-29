@@ -36,12 +36,12 @@ public class SplashActivity extends BaseActivity{
     };
 
     @Override
-    protected void init() {
+    public void init() {
         cd.setTime(DELAYED_TIME).setCountDownListener(mCountDownListener).start();
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_splash;
     }
 }
