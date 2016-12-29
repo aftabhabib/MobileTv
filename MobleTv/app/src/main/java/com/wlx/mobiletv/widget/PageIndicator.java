@@ -100,6 +100,8 @@ public class PageIndicator extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if(mAdapter == null)
+            return;
         mPaint = new Paint();
         mPaint.setColor(Color.BLACK);
         mPaint.setAntiAlias(true);

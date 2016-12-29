@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rl_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
+    android:orientation="vertical"
     >
 
-    <RelativeLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_home_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_400"
-        android:clipChildren="false">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+    </android.support.v4.view.ViewPager>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:clipChildren="false"
-            android:fadingEdge="none">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        </android.support.v4.view.ViewPager>
-
-        <com.wlx.mobiletv.widget.PageIndicator
-            android:id="@+id/pi_home"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_home"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_370"
-            />
-    </RelativeLayout>
+            android:layout_weight="1"
+            android:text="主页"/>
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btn_myself"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="我的"/>
+    </LinearLayout>
+
+
+</LinearLayout>

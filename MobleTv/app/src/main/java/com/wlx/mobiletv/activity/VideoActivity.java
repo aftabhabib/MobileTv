@@ -3,7 +3,6 @@ package com.wlx.mobiletv.activity;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.widget.TableLayout;
 
 import com.wlx.mobiletv.widget.medie.AndroidMediaController;
@@ -29,17 +28,13 @@ public class VideoActivity extends BaseActivity {
     TableLayout mHudView;
 
     @Override
-    protected void init() {
-        ActionBar actionBar = getSupportActionBar();
-
+    public void init() {
         AndroidMediaController mMediaController = new AndroidMediaController(this, false);
-        Log.i(TAG, "init: "+actionBar.toString());
-        mMediaController.setSupportActionBar(actionBar);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         mVideoView.setMediaController(mMediaController);
         mVideoView.setHudView(mHudView);
-        mVideoView.setVideoURI(Uri.parse("http://58.135.196.138:8090/live/db3bd108e3364bf3888ccaf8377af077/index.m3u8"));
+        mVideoView.setVideoURI(Uri.parse("http://hls.yun.gehua.net.cn:8088/live/HeiLongJiangHD_1200.m3u8?a=1&provider_id=gehua&assetID=92429&ET=1483026617127&TOKEN=c9119aa61e12034a5dfc2dff45dc72ae"));
         mVideoView.start();
     }
 
@@ -51,7 +46,7 @@ public class VideoActivity extends BaseActivity {
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_video;
     }
 

@@ -35,7 +35,7 @@
             android:name=".VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
-            android:theme="@style/mAppTheme"/>
+            android:theme="@style/mFullScreen"/>
     </application>
 
 </manifest>
