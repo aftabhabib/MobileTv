@@ -13,4 +13,7 @@
         //描边颜色
         <attr name="colorCountDownExternal" format="color"/>
     </declare-styleable>
+    <declare-styleable name="RoundRectLayout">
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
 </resources>

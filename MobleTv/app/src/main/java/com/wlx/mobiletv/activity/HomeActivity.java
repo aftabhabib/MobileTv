@@ -1,6 +1,7 @@
 package com.wlx.mobiletv.activity;
 
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 

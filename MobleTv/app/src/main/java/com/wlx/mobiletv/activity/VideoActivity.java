@@ -2,7 +2,6 @@ package com.wlx.mobiletv.activity;
 
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
-import android.support.v7.app.ActionBar;
 import android.widget.TableLayout;
 
 import com.wlx.mobiletv.widget.medie.AndroidMediaController;

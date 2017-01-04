@@ -105,13 +105,13 @@ public class PageIndicator extends View {
         mPaint = new Paint();
         mPaint.setColor(Color.BLACK);
         mPaint.setAntiAlias(true);
-        canvas.drawCircle(CURRENT_ITEM * STEP, 0, mCenterRadius, mPaint);
+        canvas.drawCircle(mStorkeRadius+CURRENT_ITEM * STEP, mStorkeRadius, mCenterRadius, mPaint);
         mPaint.setStrokeWidth(10);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(Color.RED);
         mPaint.setStrokeWidth(mStorkeWidth);
         for (int i = 0; i < mAdapter.getCount(); i++) {
-            canvas.drawCircle(i * STEP, 0, mStorkeRadius, mPaint);
+            canvas.drawCircle(mStorkeRadius+i * STEP,mStorkeRadius, mStorkeRadius, mPaint);
         }
     }
 
@@ -143,7 +143,7 @@ public class PageIndicator extends View {
      */
     private int measureHeight(int measureSpec) {
         int heightMode = MeasureSpec.getMode(measureSpec), heightSize = MeasureSpec.getSize(measureSpec);
-        return heightMode == MeasureSpec.EXACTLY ? heightSize : (int) mStorkeRadius;
+        return heightMode == MeasureSpec.EXACTLY ? heightSize : (int) mStorkeRadius*2;
     }
 
     /**
