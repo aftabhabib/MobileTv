@@ -1,11 +1,5 @@
 package com.wlx.mobiletv.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.wlx.mobiletv.activity.R;
 import com.wlx.mtvlibrary.base.BaseFragment;
 

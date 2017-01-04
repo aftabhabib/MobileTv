@@ -38,10 +38,15 @@ public class HomeFragmentViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView iv = new ImageView(context);
-        iv.setBackgroundColor(Color.GREEN);
+        iv.setBackgroundColor(position%2 == 0?Color.GREEN:Color.RED);
         addListener(iv);
         container.addView(iv, 0);
         return iv;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
     }
 
     private void addListener(View view) {
@@ -51,11 +56,6 @@ public class HomeFragmentViewPagerAdapter extends PagerAdapter {
                 context.startActivity(new Intent(context, VideoActivity.class));
             }
         });
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
     }
 
 }

@@ -1,5 +1,7 @@
 <resources>Theme.AppCompat.Light.DarkActionBar
+
     <style name="mAppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+
     <style name="mFullScreen" parent="@style/Theme.AppCompat.Light">
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>

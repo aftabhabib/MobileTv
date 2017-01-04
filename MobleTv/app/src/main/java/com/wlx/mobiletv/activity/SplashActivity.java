@@ -11,7 +11,7 @@ import butterknife.InjectView;
  * 作者：LucianWang
  * 日期：2016/12/6 17:23
  * 邮箱：wlx3079@163.com
- * 描述：自定义倒计时
+ * 描述：欢迎界面
  */
 
 public class SplashActivity extends BaseActivity{
@@ -21,7 +21,7 @@ public class SplashActivity extends BaseActivity{
     CountDown cd;
 
     /**延时进入主界面*/
-    private int DELAYED_TIME = 3000;
+    private int DELAYED_TIME = 1000;
     /**倒计时监听*/
     private CountDownListener mCountDownListener = new CountDownListener() {
         @Override

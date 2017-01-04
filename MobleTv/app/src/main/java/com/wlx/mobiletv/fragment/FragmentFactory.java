@@ -5,7 +5,6 @@ import android.util.SparseArray;
 
 import com.wlx.mtvlibrary.base.BaseFragment;
 
-import java.util.HashMap;
 
 /**
  * 作者：LucianWang

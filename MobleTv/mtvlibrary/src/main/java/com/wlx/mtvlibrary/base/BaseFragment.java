@@ -71,4 +71,10 @@ public abstract class BaseFragment extends Fragment implements BaseAF{
     /**不可见*/
     protected void onFragmentInVisible() {
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
 }
