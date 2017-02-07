@@ -33,7 +33,7 @@ public class VideoActivity extends BaseActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         mVideoView.setMediaController(mMediaController);
         mVideoView.setHudView(mHudView);
-        mVideoView.setVideoURI(Uri.parse("http://hls.yun.gehua.net.cn:8088/live/HeiLongJiangHD_1200.m3u8?a=1&provider_id=gehua&assetID=92429&ET=1483026617127&TOKEN=c9119aa61e12034a5dfc2dff45dc72ae"));
+        mVideoView.setVideoURI(Uri.parse("http://hls.yun.gehua.net.cn:8088/live/CCTV1HD_1200.m3u8?a=1&provider_id=gehua&assetID=27748&ET=1485620452396&TOKEN=fbfcd106fb993def88f8d1a8497e1538"));
         mVideoView.start();
     }
 
