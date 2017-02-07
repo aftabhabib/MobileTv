@@ -13,10 +13,12 @@ import java.io.File;
 
 public class Constants {
     public static final String AES_KEY = "1234r5";
-
+    public static class Config {
+        public static final boolean DEVELOPER_MODE = BuildConfig.DEBUG;
+    }
     public static String SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath();
     public static final String STORAGE_ROOT = SDCARD + File.separator + "手机电视" + File.separator;
-    public static final String HTTP_CACHE = STORAGE_ROOT + "http_cache";
-    public static final String IMG_CACHE = STORAGE_ROOT + "img_cache";
+    public static final String HTTP_CACHE = STORAGE_ROOT + "cache_http";
+    public static final String IMG_CACHE = STORAGE_ROOT + "cache_img";
 
 }

@@ -2,7 +2,8 @@ package com.wlx.mtvlibrary.utils;
 
 import android.util.Log;
 
-import readtv.ghs.tv.Constants;
+import com.wlx.mtvlibrary.Constants;
+
 
 public class LogUtil {
 
